@@ -21,7 +21,8 @@ blogRoute.get('/', async (req, res) => {
     sort = sort || 'date'
     let obj = {}
     if (category) obj.category = category
-
+    if (title) obj.title = { $regex: title }
+    console.log(obj, title)
     let data = await BlogModel.find(obj)
       .limit(limit)
       .skip((page - 1) * limit)
