@@ -45,7 +45,12 @@ userRoute.post('/login', async (req, res) => {
           var token = jwt.sign({ userId: userInDB._id }, 'secret')
           res
             .status(200)
-            .send({ msg: 'login successful', token: token, id: userInDB._id })
+            .send({
+              msg: 'login successful',
+              token: token,
+              id: userInDB._id,
+              email: userInDB.email,
+            })
         } else {
           console.log(err)
           res.status(400).send({ msg: 'something went wrong' })
